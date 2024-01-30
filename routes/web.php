@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HandleEventAction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('https://www.facebook.com/Topvorm.net/');
 });
+
+Route::get('/event/{event}', HandleEventAction::class);
