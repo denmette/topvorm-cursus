@@ -33,6 +33,8 @@ class Link extends Model
     protected $casts = [
         'id' => 'integer',
         'event_id' => 'integer',
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
     ];
 
     public function event(): BelongsTo
