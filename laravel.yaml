@@ -1,0 +1,11 @@
+name: topvorm-cursus
+runtime: php-8.2
+database: pgsql
+build:
+  - composer install --no-dev --prefer-dist --optimize-autoloader
+  - php artisan config:cache
+  - php artisan route:cache
+  - php artisan event:cache
+  - php artisan view:cache
+deploy:
+  - php artisan migrate --force
