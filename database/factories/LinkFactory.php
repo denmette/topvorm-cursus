@@ -21,11 +21,14 @@ class LinkFactory extends Factory
      */
     public function definition(): array
     {
+        $start = $this->faker->dateTimeBetween('-1 week', 'now');
+        $end = $this->faker->dateTimeBetween($start, '+1 week');
+
         return [
             'event_id' => Event::factory(),
             'url' => $this->faker->url(),
-            'start_date' => $this->faker->dateTime(),
-            'end_date' => $this->faker->dateTime(),
+            'start_date' => $start,
+            'end_date' => $end,
         ];
     }
 }
