@@ -1,8 +1,8 @@
 <?php
 
-test('Test base URL redirects to the Facebook page', function () {
+test('Test base URL redirects to the configured default link', function () {
     $response = $this->get('/');
 
     $response->assertStatus(302);
-    $response->assertRedirect('https://www.facebook.com/Topvorm.net/');
+    $response->assertRedirect(config('redirect.default'));
 });

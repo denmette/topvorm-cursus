@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('https://www.facebook.com/Topvorm.net/');
+    return redirect(config('redirect.default'));
 });
 
 Route::get('/event/{event}', HandleEventAction::class);
