@@ -21,9 +21,9 @@ class EventFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'slug' => $this->faker->slug(),
-            'fallback_url' => $this->faker->url(),
+            "name" => fake()->name(),
+            "slug" => fake()->slug(),
+            "fallback_url" => fake()->url(),
         ];
     }
 }
