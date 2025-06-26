@@ -2,12 +2,24 @@
 
 namespace App\Providers;
 
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Filament\Tables\Actions\CreateAction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * The path to your application's "home" route.
+     *
+     * Typically, users are redirected here after authentication.
+     *
+     * @var string
+     */
+    public const HOME = "/home";
+
     /**
      * Register any application services.
      */
@@ -23,8 +35,15 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
-        CreateAction::configureUsing(function ($action) {
-            return $action->slideOver();
+        $this->bootRoute();
+    }
+
+    public function bootRoute(): void
+    {
+        RateLimiter::for("api", function (Request $request) {
+            return Limit::perMinute(60)->by(
+                $request->user()?->id ?: $request->ip()
+            );
         });
     }
 }
