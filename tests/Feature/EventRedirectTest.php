@@ -39,3 +39,9 @@ test('redirects to the fallback URL if no active link is found', function () {
 
     $response->assertRedirect('http://fallback.url');
 });
+
+test('returns 404 when event is missing', function () {
+    $response = $this->get('/event/unknown-slug');
+
+    $response->assertNotFound();
+});
